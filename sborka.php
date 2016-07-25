@@ -4,7 +4,7 @@ echo "start\n";
 
 #delete not ^;\d lines
 
-$data = file2array('4.csv');
+$data = file2array('in.csv');
 //var_dump($data);
 
 
