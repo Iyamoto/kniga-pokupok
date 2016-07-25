@@ -2,7 +2,7 @@
 //kniga pokupok
 echo "start\n";
 
-#delete not ^;\d lines
+#add tests
 
 $data = file2array('in.csv');
 //var_dump($data);
@@ -34,6 +34,8 @@ $base = str_replace('$data',$text,$base);
 $base = str_replace('$sum',$sum,$base);
 file_put_contents('NO_NDS.8_7801_7801_780161151018_20160725_4D085B51-7556-4827-BD18-0466799C6603.xml',$base);
 
+echo "done\n";
+
 function file2array($filename){
 	if(file_exists($filename)){
 		$tmp = file_get_contents($filename);
@@ -44,19 +46,21 @@ function file2array($filename){
 			$i=0;
 			foreach($keys as $str){
 				if(mb_strlen(trim($str))>0){
-					$ex = explode(';',$str);
-					$id = $i;
-					//$data[$id]['line1'] = $ex[0];
-					$data[$id]['line1'] = $i+1;
-					$data[$id]['line2'] = $ex[1];
-					$data[$id]['line3'] = $ex[2];
-					$data[$id]['line4'] = $ex[3];
-					$data[$id]['line5'] = $ex[4];
-					$data[$id]['line6'] = $ex[5];
-					$data[$id]['line7'] = $ex[6];
-					$data[$id]['line8'] = $ex[7];
-					$data[$id]['line9'] = $ex[8];
-					$i++;
+					if(($str[0]==';') and ($str[1]!=';')){
+						$ex = explode(';',$str);
+						$id = $i;
+						//$data[$id]['line1'] = $ex[0];
+						$data[$id]['line1'] = $i+1;
+						$data[$id]['line2'] = $ex[1];
+						$data[$id]['line3'] = $ex[2];
+						$data[$id]['line4'] = $ex[3];
+						$data[$id]['line5'] = $ex[4];
+						$data[$id]['line6'] = $ex[5];
+						$data[$id]['line7'] = $ex[6];
+						$data[$id]['line8'] = $ex[7];
+						$data[$id]['line9'] = $ex[8];
+						$i++;
+					}
 				}	
 			}
 			return $data;
